@@ -70,12 +70,26 @@ EXEC SP_DOCTORES_ESPECIALIDAD 'Cardiología'
             var incre = new SqlParameter("@incremento", incremento);
             await this.context.Database.ExecuteSqlRawAsync(sql, esp, incre);
         }
-        public async Task IncrementarSalarioDoctoresAsyncNORAW(string especialidad, int incremento)
+        public async Task IncrementarSalarioDoctoresAsyncSinLINQ(string especialidad, int incremento)
         {
             string sql = "UPDATE DOCTOR SET SALARIO = (SALARIO + @incremento) WHERE ESPECIALIDAD = @especialidad";
             var esp = new SqlParameter("@especialidad", especialidad);
             var incre = new SqlParameter("@incremento", incremento);
             await this.context.Database.ExecuteSqlRawAsync(sql, esp, incre);
+        }
+        public async Task UpdateDoctoresEspecialidadAsyncSinRaw(string especialidad, int aumento)
+        {
+            var consulta = from datos in this.context.Doctores
+                           where datos.Especialidad == especialidad
+                           select datos;
+
+            List<Doctor> doctores = await consulta.ToListAsync();
+            foreach (var doc in doctores)
+            {
+                doc.Salario += aumento;
+            }
+
+            await this.context.SaveChangesAsync();
         }
     }
 }
