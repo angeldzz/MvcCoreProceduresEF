@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MvcCoreProceduresEF.Models;
 using MvcCoreProceduresEF.Repositories;
 using System.Threading.Tasks;
 
@@ -24,7 +25,7 @@ namespace MvcCoreProceduresEF.Controllers
             {
                 await this.repo.IncrementarSalarioDoctoresAsync(especialidad, incremento);
             }
-            var doctores = await this.repo.GetDoctoresPorEspecialidadAsync(especialidad);
+            List<Doctor> doctores = await this.repo.GetDoctoresPorEspecialidadAsync(especialidad);
             return View(doctores);
         }
     }
