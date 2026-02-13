@@ -1,0 +1,56 @@
+﻿@model TrabajadoresModel
+@{
+    List<string> oficios = ViewData["OFICIOS"] as List<string>;
+}
+
+<form method="post">
+    <label for="oficio">Oficio:</label>
+    <select name="oficio" id="oficio">
+        @foreach (string oficio in oficios)
+            {
+                <option value="@oficio">@oficio</option>
+            }
+    </select>
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+<ul class="list-group">
+    <li class="list-group-item">PERSONAS: @Model.Personas</li>
+    <li class="list-group-item">MEDIA SALARIAL: @Model.MediaSalarial</li>
+    <li class="list-group-item">SUMA SALARIAL: @Model.SumaSalarial</li>
+</ul>
+<table class="table table-warning table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Oficio
+            </th>
+            <th>
+                Salario
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Trabajadores) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Oficio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salario)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdTrabajador">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdTrabajador">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdTrabajador">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
