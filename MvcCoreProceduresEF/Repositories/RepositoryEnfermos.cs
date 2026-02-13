@@ -40,8 +40,8 @@ EXEC SP_INSERT_ENFERMO 'Angel', 'VALENCIA', '19670623', 'F', '545343243';
     #endregion
     public class RepositoryEnfermos
     {
-        private EnfermosContext context;
-        public RepositoryEnfermos(EnfermosContext context)
+        private HospitalContext context;
+        public RepositoryEnfermos(HospitalContext context)
         {
             this.context = context;
         }

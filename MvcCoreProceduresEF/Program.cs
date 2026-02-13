@@ -7,8 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<RepositoryEnfermos>();
 builder.Services.AddTransient<RepositoryDoctores>();
+builder.Services.AddTransient<RepositoryEmpleados>();
 string connectionstring = builder.Configuration.GetConnectionString("SqlHospital");
-builder.Services.AddDbContext<MvcCoreProceduresEF.Data.EnfermosContext>(options =>
+builder.Services.AddDbContext<MvcCoreProceduresEF.Data.HospitalContext>(options =>
     options.UseSqlServer(connectionstring));
 var app = builder.Build();
 

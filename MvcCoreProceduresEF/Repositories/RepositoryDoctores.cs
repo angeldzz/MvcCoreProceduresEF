@@ -22,17 +22,17 @@ CREATE PROCEDURE SP_DOCTORES_ESPECIALIDAD
 AS
 	SELECT * FROM DOCTOR WHERE ESPECIALIDAD = @especialidad
 GO
-
-
+--------------------------------------------------------
 EXEC SP_GET_ESPECIALIDADES
 EXEC SP_UPDATE_SALARIO_DOCTORES 'Psiquiatría', 20
 EXEC SP_DOCTORES_ESPECIALIDAD 'Cardiología'
+--------------------------------------------------------
      */
     #endregion
     public class RepositoryDoctores
     {
-        private EnfermosContext context;
-        public RepositoryDoctores(EnfermosContext context)
+        private HospitalContext context;
+        public RepositoryDoctores(HospitalContext context)
         {
             this.context = context;
         }
